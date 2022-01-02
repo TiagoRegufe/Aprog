@@ -66,9 +66,9 @@ void Equipas()  //ponto 2 da parte 1
     strcpy(NEQS[16].estadio, "Estadio Dom Afonso Henriques");
     strcpy(NEQS[17].estadio, "Estadio do Vizela");
 
-    //zerar pontos, vitórias, empates, derrotas, golos
+    //zerar pontos, vitórias, empates, derrotas, golos(tem que ser uma funcao)
 int n=18;
-printf("                   P  V  E  D  M  S \n");
+
     for(int i=0;i<n;i++){
         NEQS[i].pontos= 0;
         NEQS[i].vitorias= 0;
@@ -76,11 +76,14 @@ printf("                   P  V  E  D  M  S \n");
         NEQS[i].derrotas= 0;
         NEQS[i].golos_marcados= 0;
         NEQS[i].golos_sofridos= 0;
-//Escrever as equipas e a pontuaçao a zero
+    //Escrever a tabela(tem que ser outra funcao)
 
-        printf("%s     %d  %d  %d  %d  %d  %d",NEQS[i].equipa,NEQS[i].pontos,NEQS[i].vitorias,NEQS[i].empates,NEQS[i].derrotas,NEQS[i].golos_marcados,NEQS[i].golos_sofridos);
+        printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d",NEQS[i].equipa,NEQS[i].pontos,NEQS[i].vitorias,NEQS[i].empates,NEQS[i].derrotas,NEQS[i].golos_marcados,NEQS[i].golos_sofridos);
         printf("\n");
         }
+}
+void trocar_elementos(NEQS[]){
+    
 }
 
 
@@ -88,10 +91,11 @@ printf("                   P  V  E  D  M  S \n");
 int main()
 {
     int n=18;
-    char equipa[18][14]= {"Arouca", "Belenenses", "Benfica", "Boavista", "Braga", "Estoril", "Famalicao", "Gil Vicente", "Maritimo", "Moreirense", "Pacos Ferreira", "Porto", "Portimonense", "Santa Clara", "Sporting", "Tondela", "Vitoria", "Vizela"};
+    printf("                   P   V   E   D   M   S \n");
     Equipas();
 
   getchar();
   return 0;
 }
+
 
