@@ -31,25 +31,25 @@ void Equipas()              //ponto 2 da parte 1
     strcpy(NEQS[7].equipa, "Gil Vicente   ");
     strcpy(NEQS[8].equipa, "Maritimo      ");
     strcpy(NEQS[9].equipa, "Moreirense    ");
-    strcpy(NEQS[10].equipa,"Pacos Ferreira");
-    strcpy(NEQS[11].equipa,"Porto         ");
-    strcpy(NEQS[12].equipa,"Portimonense  ");
-    strcpy(NEQS[13].equipa,"Santa Clara   ");
-    strcpy(NEQS[14].equipa,"Sporting      ");
-    strcpy(NEQS[15].equipa,"Tondela       ");
-    strcpy(NEQS[16].equipa,"Vitoria       ");
-    strcpy(NEQS[17].equipa,"Vizela        ");
+    strcpy(NEQS[10].equipa, "Pacos Ferreira");
+    strcpy(NEQS[11].equipa, "Porto         ");
+    strcpy(NEQS[12].equipa, "Portimonense  ");
+    strcpy(NEQS[13].equipa, "Santa Clara   ");
+    strcpy(NEQS[14].equipa, "Sporting      ");
+    strcpy(NEQS[15].equipa, "Tondela       ");
+    strcpy(NEQS[16].equipa, "Vitoria       ");
+    strcpy(NEQS[17].equipa, "Vizela        ");
     //escreve os estádios
-    strcpy(NEQS[0].estadio,  "Estadio Municipal de Arouca");
-    strcpy(NEQS[1].estadio,  "Estadio do Restelo");
-    strcpy(NEQS[2].estadio,  "Estadio da Luz");
-    strcpy(NEQS[3].estadio,  "Estadio do Bessa");
-    strcpy(NEQS[4].estadio,  "Estadio Municipal de Braga");
-    strcpy(NEQS[5].estadio,  "Estadio Antonio Coimbra da Mota");
-    strcpy(NEQS[6].estadio,  "Estadio Municipal 22 de Junho");
-    strcpy(NEQS[7].estadio,  "Estadio Cidade de Barcelos");
-    strcpy(NEQS[8].estadio,  "Estadio dos Barreiros");
-    strcpy(NEQS[9].estadio,  "Estadio Comendador Joaquim de Almeida Freitas");
+    strcpy(NEQS[0].estadio, "Estadio Municipal de Arouca");
+    strcpy(NEQS[1].estadio, "Estadio do Restelo");
+    strcpy(NEQS[2].estadio, "Estadio da Luz");
+    strcpy(NEQS[3].estadio, "Estadio do Bessa");
+    strcpy(NEQS[4].estadio, "Estadio Municipal de Braga");
+    strcpy(NEQS[5].estadio, "Estadio Antonio Coimbra da Mota");
+    strcpy(NEQS[6].estadio, "Estadio Municipal 22 de Junho");
+    strcpy(NEQS[7].estadio, "Estadio Cidade de Barcelos");
+    strcpy(NEQS[8].estadio, "Estadio dos Barreiros");
+    strcpy(NEQS[9].estadio, "Estadio Comendador Joaquim de Almeida Freitas");
     strcpy(NEQS[10].estadio, "Estadio da Capital Movel");
     strcpy(NEQS[11].estadio, "Estadio do Dragao");
     strcpy(NEQS[12].estadio, "Estadio do Portimonense");
@@ -69,7 +69,7 @@ void Equipas()              //ponto 2 da parte 1
         NEQS[i].golos_marcados= 0;
         NEQS[i].golos_sofridos= 0;
     //Escrever a tabela(tem que ser outra funcao)
-        printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n",NEQS[i].equipa,NEQS[i].pontos,NEQS[i].vitorias,NEQS[i].empates,NEQS[i].derrotas,NEQS[i].golos_marcados,NEQS[i].golos_sofridos);
+        printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", NEQS[i].equipa, NEQS[i].pontos, NEQS[i].vitorias, NEQS[i].empates, NEQS[i].derrotas, NEQS[i].golos_marcados, NEQS[i].golos_sofridos);
         }
 }
 
