@@ -75,7 +75,7 @@ void Equipas()              //ponto 2 da parte 1
 
 void trocar_elementos(NEQS[])
 {
-    ola
+
 }
 
 int main()
