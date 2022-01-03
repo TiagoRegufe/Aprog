@@ -62,12 +62,12 @@ void Equipas()              //ponto 2 da parte 1
     int n=18;
     for(int i=0;i<n;i++)
     {
-        NEQS[i].pontos= 0;
-        NEQS[i].vitorias= 0;
-        NEQS[i].empates= 0;
-        NEQS[i].derrotas= 0;
-        NEQS[i].golos_marcados= 0;
-        NEQS[i].golos_sofridos= 0;
+        NEQS[i].pontos=0;
+        NEQS[i].vitorias=0;
+        NEQS[i].empates=0;
+        NEQS[i].derrotas=0;
+        NEQS[i].golos_marcados=0;
+        NEQS[i].golos_sofridos=0;
     //Escrever a tabela(tem que ser outra funcao)
         printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", NEQS[i].equipa, NEQS[i].pontos, NEQS[i].vitorias, NEQS[i].empates, NEQS[i].derrotas, NEQS[i].golos_marcados, NEQS[i].golos_sofridos);
         }
