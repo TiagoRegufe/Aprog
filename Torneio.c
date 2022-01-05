@@ -87,19 +87,32 @@ void escrever_tabela(t_equipa Neq[], int n)          //Parte 1, ponto 4
     escrever_equipas(Neq, n);
 }
 
+
+void troca(t_equipa Neqs[],int p1,int p2){           //Parte 1, ponto 6
+    t_equipa a=Neqs[p1];Neqs[p1]=Neqs[p2];Neqs[p2]=a;
+}
+
+
+void organizar_equipas(t_equipa Neqs[],int n){       //Parte 1, ponto 8
+    for(int i=n-1;i>0;i--){
+            troca(Neqs,i,rand()%(i+1));
+    }
+}
+
 int main()
 {
     int n=18;
     struct s_equipa equipa;
     t_equipa Neqs[n];
+    srand(time(NULL));
     printf("Este trabalho consiste na simulacao do campeonato portugues de futebol 2021/2022\n\n");
     ler_equipas(Neqs);          //Se calhar é a única vez que vai ser usado
     printf("==============Tabela Inicial==============\n");
     zerar_score(Neqs);          //Única vez que vai ser usado
+    organizar_equipas(Neqs,n);
     escrever_tabela(Neqs, n);
     printf("==========================================\n\n");
     printf("Jogos da Jornada 1:\n");
-
     getchar();
     return 0;
 }
