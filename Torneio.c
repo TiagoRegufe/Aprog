@@ -61,7 +61,7 @@ void ler_equipas(t_equipa NEQS[18])              //Parte 1, ponto 2
 void zerar_score(t_equipa NEQS[])    //zerar pontos, vitórias, empates, derrotas, golos(tem que ser uma funcao)
 {
     int n=18;
-    for(int i=0;i<n;i++)
+    for(int i=0; i<n; i++)
     {
         NEQS[i].pontos=0;
         NEQS[i].vitorias=0;
@@ -75,7 +75,7 @@ void zerar_score(t_equipa NEQS[])    //zerar pontos, vitórias, empates, derrota
 void escrever_equipas(t_equipa Neq[], int n)         //Parte 1, ponto 3
 {
 
-    for(int i=0;i<n;i++)
+    for(int i=0; i<n; i++)
     {
       printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", Neq[i].equipa, Neq[i].pontos, Neq[i].vitorias, Neq[i].empates, Neq[i].derrotas, Neq[i].golos_marcados, Neq[i].golos_sofridos);
     }
