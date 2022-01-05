@@ -83,6 +83,7 @@ int main()
     int n=18;
     printf("                   P   V   E   D   M   S \n");
     Equipas();
+
     getchar();
     return 0;
 }
