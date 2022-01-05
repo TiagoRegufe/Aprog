@@ -70,7 +70,7 @@ void Equipas()              //ponto 2 da parte 1
         NEQS[i].golos_sofridos=0;
     //Escrever a tabela(tem que ser outra funcao)
         printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", NEQS[i].equipa, NEQS[i].pontos, NEQS[i].vitorias, NEQS[i].empates, NEQS[i].derrotas, NEQS[i].golos_marcados, NEQS[i].golos_sofridos);
-        }
+    }
 }
 
 void trocar_elementos(NEQS[])
@@ -78,11 +78,22 @@ void trocar_elementos(NEQS[])
 
 }
 
+void escrever_tabela()
+{
+    printf("                   P   V   E   D   M   S \n");
+    Equipas();
+}
+
 int main()
 {
     int n=18;
-    printf("                   P   V   E   D   M   S \n");
-    Equipas();
+    printf("Este trabalho consiste na simulacao do campeonato portugues de futebol 2021/2022\n");
+    putchar('\n');
+    printf("==============Tabela Inicial==============\n");
+    escrever_tabela();
+    printf("==========================================\n");
+    putchar('\n');
+    printf("Jogos da Jornada 1:\n");
 
     getchar();
     return 0;
