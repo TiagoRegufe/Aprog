@@ -16,7 +16,7 @@ typedef struct s_equipa     //ponto 1 da parte 1
     int golos_sofridos;
 } t_equipa;
 
-void Equipas()              //ponto 2 da parte 1
+void ler_equipas()              //ponto 2 da parte 1
 {
     struct s_equipa equipa1, equipa2, equipa3, equipa4, equipa5, equipa6, equipa7, equipa8, equipa9, equipa10, equipa11, equipa12, equipa13, equipa14, equipa15, equipa16, equipa17, equipa18;
     t_equipa NEQS[18]={equipa1, equipa2, equipa3, equipa4, equipa5, equipa6, equipa7, equipa8, equipa9, equipa10, equipa11, equipa12, equipa13, equipa14, equipa15, equipa16, equipa17, equipa18};
@@ -58,7 +58,10 @@ void Equipas()              //ponto 2 da parte 1
     strcpy(NEQS[15].estadio, "Estadio Joao Cardoso");
     strcpy(NEQS[16].estadio, "Estadio Dom Afonso Henriques");
     strcpy(NEQS[17].estadio, "Estadio do Vizela");
-    //zerar pontos, vitórias, empates, derrotas, golos(tem que ser uma funcao)
+}
+
+void zerar_score(t_equipa NEQS[])    //zerar pontos, vitórias, empates, derrotas, golos(tem que ser uma funcao)  /*NÃO SEI SE ESTÁ A FUNCIONAR*/
+{
     int n=18;
     for(int i=0;i<n;i++)
     {
@@ -68,20 +71,22 @@ void Equipas()              //ponto 2 da parte 1
         NEQS[i].derrotas=0;
         NEQS[i].golos_marcados=0;
         NEQS[i].golos_sofridos=0;
-    //Escrever a tabela(tem que ser outra funcao)
-        printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", NEQS[i].equipa, NEQS[i].pontos, NEQS[i].vitorias, NEQS[i].empates, NEQS[i].derrotas, NEQS[i].golos_marcados, NEQS[i].golos_sofridos);
     }
 }
 
-void trocar_elementos(NEQS[])
+void escrever_equipas()     //ponto 3 parte 1            /*NÃO ESTÁ A FUNCIONAR*/
 {
-
+    int n=18;
+    for(int i=0;i<n;i++)
+    {
+      printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", ler_equipas());
+    }
 }
 
-void escrever_tabela()
+void escrever_tabela()      //ponto 4 parte 1
 {
     printf("                   P   V   E   D   M   S \n");
-    Equipas();
+    escrever_equipas();
 }
 
 int main()
