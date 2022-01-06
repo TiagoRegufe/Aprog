@@ -83,12 +83,10 @@ void escrever_tabela(t_equipa Neq[], int n)          //Parte 1, ponto 4
     escrever_equipas(Neq, n);
 }
 
-
 void troca(t_equipa Neqs[],int p1,int p2)            //Parte 1, ponto 6
 {
     t_equipa a=Neqs[p1]; Neqs[p1]=Neqs[p2]; Neqs[p2]=a;
 }
-
 
 void organizar_equipas(t_equipa Neqs[],int n)        //Parte 1, ponto 8
 {
