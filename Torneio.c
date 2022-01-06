@@ -74,10 +74,7 @@ void zerar_score(t_equipa NEQS[])    //zerar pontos, vitórias, empates, derrota
 
 void escrever_equipas(t_equipa Neq[], int n)         //Parte 1, ponto 3
 {
-    for(int i=0; i<n; i++)
-    {
-      printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", Neq[i].equipa, Neq[i].pontos, Neq[i].vitorias, Neq[i].empates, Neq[i].derrotas, Neq[i].golos_marcados, Neq[i].golos_sofridos);
-    }
+    for(int i=0; i<n; i++) printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", Neq[i].equipa, Neq[i].pontos, Neq[i].vitorias, Neq[i].empates, Neq[i].derrotas, Neq[i].golos_marcados, Neq[i].golos_sofridos);
 }
 
 void escrever_tabela(t_equipa Neq[], int n)          //Parte 1, ponto 4
@@ -89,15 +86,13 @@ void escrever_tabela(t_equipa Neq[], int n)          //Parte 1, ponto 4
 
 void troca(t_equipa Neqs[],int p1,int p2)            //Parte 1, ponto 6
 {
-    t_equipa a=Neqs[p1];Neqs[p1]=Neqs[p2];Neqs[p2]=a;
+    t_equipa a=Neqs[p1]; Neqs[p1]=Neqs[p2]; Neqs[p2]=a;
 }
 
 
 void organizar_equipas(t_equipa Neqs[],int n)        //Parte 1, ponto 8
 {
-    for(int i=n-1;i>0;i--){
-            troca(Neqs,i,rand()%(i+1));
-    }
+    for(int i=n-1;i>0;i--) troca(Neqs,i,rand()%(i+1));
 }
 
 int main()
