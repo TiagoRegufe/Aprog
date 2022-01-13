@@ -90,21 +90,27 @@ void baralhar_equipas(t_equipa vEq[])                //Parte 1, ponto 8
     for(int i=NEQS-1; i>0; i--) troca(vEq, i, rand()%(i+1));
 }
 
-int melhor_qualificacao(t_equipa vEq[], int eqA, int eqB)         //Parte 1, ponto 11    //Tem que receber duas t_equipas em vez de posições
+int melhor_qualificacao(t_equipa eqA, t_equipa eqB)         //Parte 1, ponto 11
 {
-    if(vEq[eqA].pontos>vEq[eqB].pontos) return 1;
-    if(vEq[eqA].pontos<vEq[eqB].pontos) return 0;
-    if(vEq[eqA].golos_marcados>vEq[eqB].golos_marcados) return 1;
-    if(vEq[eqA].golos_marcados<vEq[eqB].golos_marcados) return 0;
-    if(vEq[eqA].golos_sofridos<vEq[eqB].golos_sofridos) return 1;
-    if(vEq[eqA].golos_sofridos>vEq[eqB].golos_sofridos) return 0;
+    if(eqA.pontos>eqB.pontos) return 1;
+    if(eqA.pontos<eqB.pontos) return 0;
+    if(eqA.golos_marcados>eqB.golos_marcados) return 1;
+    if(eqA.golos_marcados<eqB.golos_marcados) return 0;
+    if(eqA.golos_sofridos<eqB.golos_sofridos) return 1;
+    if(eqA.golos_sofridos>eqB.golos_sofridos) return 0;
     return 1;
 }
 
 int PosDoMenor(t_equipa vEq[], int n)
 {
+    t_equipa eqA, eqB;
     int p=0;
-    for(int i=1; i<n; i++) if(melhor_qualificacao(vEq, p, i)==1) p=i;
+    for(int i=1; i<n; i++)
+    {
+        eqA=vEq[i];
+        eqB=vEq[p];
+        if(melhor_qualificacao(eqB, eqA)==1) p=i;
+    }
     return p;
 }
 
@@ -165,7 +171,9 @@ int main()
     t_equipa vEq[NEQS];
 
     printf("Este trabalho consiste na simulacao do campeonato portugues de futebol 2021/2022\n\n");
-    criar_equipas(vEq);          //Se calhar é a única vez que vai ser usado
+    criar_equipas(vEq);          //Única vez que vai ser usado
+/*TESTE*/    baralhar_equipas(vEq);
+
 /*PARA TESTAR               // Parte 1, ponto 10
 vEq[12].pontos=2;
 vEq[15].pontos=3;
@@ -194,15 +202,14 @@ vEq[0].golos_marcados=9;
 vEq[7].golos_marcados=9;
 vEq[0].golos_sofridos=1;
 vEq[7].golos_sofridos=2;*/
+
     printf("==============Tabela Inicial==============\n");
-    baralhar_equipas(vEq);
     ordenar_por_qualificacao(vEq);
-    //escrever_tabela(vEq);
     printf("==========================================\n\n");
     printf("Jogos da Jornada 1:\n");
 
-/*printf (" --->>>>  %d    %s     %s\n", melhor_qualificacao(vEq, 0, 1), vEq[0].nome, vEq[1].nome);*/
-/*printf("%d \n", posicao_equipa(vEq[17].nome, vEq));*/
+/*printf (" --->>>>  %d    %s     %s\n", melhor_qualificacao(vEq, 0, 1), vEq[0].nome, vEq[1].nome);
+printf("%d \n", posicao_equipa(vEq[17].nome, vEq));*/
     t_jogo jogox;
     jogox.eq_casa=vEq[3];
     jogox.eq_fora=vEq[5];
