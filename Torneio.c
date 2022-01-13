@@ -6,9 +6,9 @@
 
 #define NEQS 18
 
-typedef struct s_equipa     //Parte 1, ponto 1
+typedef struct s_equipa                         //Parte 1, ponto 1
 {
-    char equipa[15];
+    char nome[15];
     char estadio[46];
     int pontos;
     int vitorias;
@@ -18,27 +18,27 @@ typedef struct s_equipa     //Parte 1, ponto 1
     int golos_sofridos;
 } t_equipa;
 
-void ler_equipas(t_equipa vEq[])              //Parte 1, ponto 2
+void criar_equipas(t_equipa vEq[])              //Parte 1, ponto 2
 {
     //Nomes das equipas
-    strcpy(vEq[0].equipa, "Arouca        ");
-    strcpy(vEq[1].equipa, "Belenenses    ");
-    strcpy(vEq[2].equipa, "Benfica       ");
-    strcpy(vEq[3].equipa, "Boavista      ");
-    strcpy(vEq[4].equipa, "Braga         ");
-    strcpy(vEq[5].equipa, "Estoril       ");
-    strcpy(vEq[6].equipa, "Famalicao     ");
-    strcpy(vEq[7].equipa, "Gil Vicente   ");
-    strcpy(vEq[8].equipa, "Maritimo      ");
-    strcpy(vEq[9].equipa, "Moreirense    ");
-    strcpy(vEq[10].equipa, "Pacos Ferreira");
-    strcpy(vEq[11].equipa, "Porto         ");
-    strcpy(vEq[12].equipa, "Portimonense  ");
-    strcpy(vEq[13].equipa, "Santa Clara   ");
-    strcpy(vEq[14].equipa, "Sporting      ");
-    strcpy(vEq[15].equipa, "Tondela       ");
-    strcpy(vEq[16].equipa, "Vitoria       ");
-    strcpy(vEq[17].equipa, "Vizela        ");
+    strcpy(vEq[0].nome,  "Arouca        ");
+    strcpy(vEq[1].nome,  "Belenenses    ");
+    strcpy(vEq[2].nome,  "Benfica       ");
+    strcpy(vEq[3].nome,  "Boavista      ");
+    strcpy(vEq[4].nome,  "Braga         ");
+    strcpy(vEq[5].nome,  "Estoril       ");
+    strcpy(vEq[6].nome,  "Famalicao     ");
+    strcpy(vEq[7].nome,  "Gil Vicente   ");
+    strcpy(vEq[8].nome,  "Maritimo      ");
+    strcpy(vEq[9].nome,  "Moreirense    ");
+    strcpy(vEq[10].nome, "Pacos Ferreira");
+    strcpy(vEq[11].nome, "Porto         ");
+    strcpy(vEq[12].nome, "Portimonense  ");
+    strcpy(vEq[13].nome, "Santa Clara   ");
+    strcpy(vEq[14].nome, "Sporting      ");
+    strcpy(vEq[15].nome, "Tondela       ");
+    strcpy(vEq[16].nome, "Vitoria       ");
+    strcpy(vEq[17].nome, "Vizela        ");
     //Nomes dos estádios
     strcpy(vEq[0].estadio, "Estadio Municipal de Arouca");
     strcpy(vEq[1].estadio, "Estadio do Restelo");
@@ -56,11 +56,11 @@ void ler_equipas(t_equipa vEq[])              //Parte 1, ponto 2
     strcpy(vEq[13].estadio, "Estadio de Sao Miguel");
     strcpy(vEq[14].estadio, "Estadio Jose Alvalade");
     strcpy(vEq[15].estadio, "Estadio Joao Cardoso");
-    strcpy(vEq[16].estadio, "Estadio Dom Afonso Henriques");
+    strcpy(vEq[16].estadio, "Estadio Dom Afonso Henrique");
     strcpy(vEq[17].estadio, "Estadio do Vizela");
 }
 
-void zerar_score(t_equipa vEq[])    //zerar pontos, vitórias, empates, derrotas, golos(tem que ser uma funcao)
+void zerar_score(t_equipa vEq[])    //zerar pontos, vitórias, empates, derrotas, golos
 {
     for(int i=0;i<NEQS;i++)
     {
@@ -75,7 +75,7 @@ void zerar_score(t_equipa vEq[])    //zerar pontos, vitórias, empates, derrotas
 
 void escrever_equipas(t_equipa vEq[])         //Parte 1, ponto 3
 {
-    for(int i=0;i<NEQS;i++) printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", vEq[i].equipa, vEq[i].pontos, vEq[i].vitorias, vEq[i].empates, vEq[i].derrotas, vEq[i].golos_marcados, vEq[i].golos_sofridos);
+    for(int i=0;i<NEQS;i++) printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", vEq[i].nome, vEq[i].pontos, vEq[i].vitorias, vEq[i].empates, vEq[i].derrotas, vEq[i].golos_marcados, vEq[i].golos_sofridos);
 }
 
 void escrever_tabela(t_equipa vEq[])          //Parte 1, ponto 4
@@ -90,7 +90,7 @@ void troca(t_equipa vEq[], int p1, int p2)           //Parte 1, ponto 6
 }
 
 
-void baralhar_equipas(t_equipa vEq[]){       //Parte 1, ponto 8
+void baralhar_equipas(t_equipa vEq[]){                            //Parte 1, ponto 8
     for(int i=NEQS-1;i>0;i--) troca(vEq,i,rand()%(i+1));
 }
 
@@ -112,7 +112,7 @@ int PosDoMenor(t_equipa vEq[], int n){
     return p;
 }
 
-int oredenar_por_qualificacao(t_equipa vEq[]){  //Parte 1, ponto 13
+int ordenar_por_qualificacao(t_equipa vEq[]){                     //Parte 1, ponto 13
     for (int q=NEQS; q>1; q--)
     {
         troca(vEq, PosDoMenor(vEq, q), q-1);
@@ -121,31 +121,43 @@ int oredenar_por_qualificacao(t_equipa vEq[]){  //Parte 1, ponto 13
 }
 
 int posicao_equipa (char nome[], t_equipa vEq[]){                 //Parte 1, ponto 15
-    for(int i=0; i<NEQS; i++) if (strcmp(nome, vEq[i].equipa)==0) return i;
+    for(int i=0; i<NEQS; i++) if (strcmp(nome, vEq[i].nome)==0) return i;
     return -1;
 }
 
-void rodar_vEq (t_equipa vEq[]){           //Parte 1,ponto 17 (ESTÁ A RODAR PARA A DIREITA EM VEZ DE RODAR PARA A ESQUERDA)
+void rodar_vEq (t_equipa vEq[]){                                  //Parte 1,ponto 17
     t_equipa  a=vEq[NEQS-1];
-    for(int i=NEQS-1; i>1; i--) troca(vEq, i, i-1);
+    for(int i=1; i<NEQS-1; i++) troca(vEq, i, i+1);
     a=vEq[1];
     escrever_tabela(vEq);
 }
+
+typedef struct s_jogo{                                            //Parte 2, ponto 19
+    
+    char estadio[50];
+    t_equipa eq_casa;
+    t_equipa eq_fora;
+    int golos_casa;
+    int golos_fora;
+}t_jogo;
+
+void escrever_jogo(t_jogo jogo)                                   //Parte 2, ponto 20
+{
+
+    printf("%s %d X %d %s  (%s)\n",jogo.eq_casa.nome,jogo.golos_casa,jogo.golos_fora,jogo.eq_fora.nome,jogo.estadio);
+}
+
 
 int main()
 {
     srand(time(NULL));
 
-    t_equipa equipa;
     t_equipa vEq[NEQS];
 
     printf("Este trabalho consiste na simulacao do campeonato portugues de futebol 2021/2022\n\n");
-    ler_equipas(vEq);          //Se calhar é a única vez que vai ser usado
-    printf("==============Tabela Inicial==============\n");
-    zerar_score(vEq);          //Única vez que vai ser usado
+    criar_equipas(vEq);          //Se calhar é a única vez que vai ser usado
 
-    baralhar_equipas(vEq);
-//PARA TESTAR               // Parte 1, ponto 10
+/*PARA TESTAR               // Parte 1, ponto 10
     vEq[12].pontos=2;
     vEq[15].pontos=3;
     vEq[12].golos_marcados=6;
@@ -173,20 +185,29 @@ int main()
     vEq[7].golos_marcados=9;
     vEq[0].golos_sofridos=1;
     vEq[7].golos_sofridos=2;
-//
 
-    escrever_tabela(vEq);
+*/
+    printf("==============Tabela Inicial==============\n");
+    zerar_score(vEq);          //Única vez que vai ser usado
+
+    baralhar_equipas(vEq);
+
+    ordenar_por_qualificacao(vEq);
+    //escrever_tabela(vEq);
     printf("==========================================\n\n");
     printf("Jogos da Jornada 1:\n");
-    oredenar_por_qualificacao(vEq);
-
-    printf (" --->>>>  %d    %s     %s\n", melhor_qualificacao(vEq, 0, 1), vEq[0].equipa, vEq[1].equipa);
-
-    printf("%d \n", posicao_equipa(vEq[17].equipa, vEq));
 
 
-    rodar_vEq(vEq);
+    //printf (" --->>>>  %d    %s     %s\n", melhor_qualificacao(vEq, 0, 1), vEq[0].nome, vEq[1].nome);
+    //printf("%d \n", posicao_equipa(vEq[17].nome, vEq));
 
+    t_jogo jogox;
+    jogox.eq_casa=vEq[3];
+    jogox.eq_fora=vEq[5];
+    jogox.golos_casa=5;
+    jogox.golos_fora=2;
+    strcpy(jogox.estadio,vEq[3].estadio);
+    escrever_jogo(jogox);
 
     getchar();
     return 0;
