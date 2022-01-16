@@ -126,12 +126,11 @@ int posicao_equipa (char nome[], t_equipa vEq[])            //Parte 1, ponto 15
     return -1;
 }
 
-void rodar_vEq (t_equipa vEq[])                     //Parte 1,ponto 17
+void rodar_vEq(t_equipa vEq[])                     //Parte 1,ponto 17
 {
-    t_equipa  a=vEq[NEQS-1];
+    t_equipa a=vEq[NEQS-1];
     for(int i=1; i<NEQS-1; i++) troca(vEq, i, i+1);
     a=vEq[1];
-    escrever_tabela(vEq);
 }
 
 typedef struct s_jogo                       //Parte 2, ponto 19
@@ -143,29 +142,53 @@ typedef struct s_jogo                       //Parte 2, ponto 19
     int golos_fora;
 }t_jogo;
 
-void escrever_jogos(t_jogo jogo)                                   //Parte 2, ponto 20
-{
-    printf("%s %d X %d %s  (%s)\n", jogo.eq_casa.nome, jogo.golos_casa, jogo.golos_fora, jogo.eq_fora.nome, jogo.estadio);
-}
-
 typedef struct s_jornada  //Parte 2, ponto 22
 {
-    int jor[NEQS/2];
+    t_jogo jogpjor[NEQS/2];
 }t_jornada;
 
-int pri_jor(t_equipa vEq[], t_jogo casa[], t_jogo fora[])
+void escrever_jornadas(t_jornada jornada[], t_equipa equipas[])
 {
-    t_jogo jogos;
-    for(int i=0; i<(NEQS/2); i++)
+    for(int i=0; i<(NEQS-1)*2; i++)
     {
-        strcpy(jogos.estadio, vEq[i].estadio);
-        casa[i].eq_casa=vEq[i];
-        fora[NEQS-i-1].eq_fora=vEq[NEQS-i-1];
-        jogos.eq_casa=vEq[i];
-        jogos.eq_fora=vEq[NEQS-i-1];
-        jogos.golos_casa=rand()%4+1;
-        jogos.golos_fora=rand()%4+1;
-        escrever_jogos(jogos);
+        printf("Jogos da jornada %d:\n", i+1);
+        for(int j=0; j<(NEQS/2); j++)
+        {
+            printf("%s %d X %d %s  (%s)\n", jornada[i].jogpjor[j].eq_casa.nome, jornada[i].jogpjor[j].golos_casa, jornada[i].jogpjor[j].golos_fora, jornada[i].jogpjor[j].eq_fora.nome, jornada[i].jogpjor[j].estadio);
+        }
+        printf("\n============Tabela na Jornada %d===========\n", i+1);
+        ordenar_por_qualificacao(equipas);
+        printf("==========================================\n\n");
+    }
+}
+
+void criar_todas_jorn(t_jornada jornadas[], t_equipa equipas[])
+{
+    for(int i=0; i<(NEQS-1)*2; i++) // 34 jornadas
+    {
+        if(i%2==0) // jornada impar
+        {
+            for(int j=0; j<NEQS/2; j++)
+            {
+                jornadas[i].jogpjor[j].eq_casa=equipas[j];
+                jornadas[i].jogpjor[j].eq_fora=equipas[NEQS-1-j];
+                strcpy(jornadas[i].jogpjor[j].estadio, jornadas[i].jogpjor[j].eq_casa.estadio);
+                jornadas[i].jogpjor[j].golos_casa=rand()%4+1;
+                jornadas[i].jogpjor[j].golos_fora=rand()%2+1;
+            }
+        }
+        else       // jornada par
+        {
+            for(int j=0; j<NEQS/2; j++)
+            {
+                jornadas[i].jogpjor[j].eq_fora=equipas[j];
+                jornadas[i].jogpjor[j].eq_casa=equipas[NEQS-1-j];
+                strcpy(jornadas[i].jogpjor[j].estadio, jornadas[i].jogpjor[j].eq_casa.estadio);
+                jornadas[i].jogpjor[j].golos_casa=rand()%4+1;
+                jornadas[i].jogpjor[j].golos_fora=rand()%2+1;
+            }
+        }
+        rodar_vEq(equipas);
     }
 }
 
@@ -174,57 +197,17 @@ int main()
     srand(time(NULL));
 
     t_equipa vEq[NEQS];
-    t_jogo eqcasa[NEQS/2], eqfora[NEQS/2];
+    t_jornada j[(NEQS-1)*2];
+    t_jogo jogos[NEQS/2];
 
     printf("Este trabalho consiste na simulacao do campeonato portugues de futebol 2021/2022\n\n");
     criar_equipas(vEq);          //Única vez que vai ser usado
-/*TESTE*/    baralhar_equipas(vEq);
-
-/*PARA TESTAR               // Parte 1, ponto 10
-vEq[12].pontos=2;
-vEq[15].pontos=3;
-vEq[12].golos_marcados=6;
-vEq[15].golos_marcados=5;
-vEq[12].golos_sofridos=1;
-vEq[15].golos_sofridos=8;
-
-vEq[2].pontos=8;
-vEq[5].pontos=6;
-vEq[2].golos_marcados=4;
-vEq[5].golos_marcados=5;
-vEq[2].golos_sofridos=1;
-vEq[5].golos_sofridos=3;
-
-vEq[3].pontos=6;
-vEq[6].pontos=5;
-vEq[3].golos_marcados=5;
-vEq[6].golos_marcados=1;
-vEq[3].golos_sofridos=4;
-vEq[6].golos_sofridos=8;
-
-vEq[0].pontos=1;
-vEq[7].pontos=2;
-vEq[0].golos_marcados=9;
-vEq[7].golos_marcados=9;
-vEq[0].golos_sofridos=1;
-vEq[7].golos_sofridos=2;*/
-
     printf("==============Tabela Inicial==============\n");
     ordenar_por_qualificacao(vEq);
     printf("==========================================\n\n");
-    printf("Jogos da Jornada 1:\n");
-    pri_jor(vEq, eqcasa, eqfora);
-
-/*printf (" --->>>>  %d    %s     %s\n", melhor_qualificacao(vEq, 0, 1), vEq[0].nome, vEq[1].nome);
-printf("%d \n", posicao_equipa(vEq[17].nome, vEq));
-t_jogo jogox;
-jogox.eq_casa=vEq[3];
-jogox.eq_fora=vEq[5];
-jogox.golos_casa=5;
-jogox.golos_fora=2;
-strcpy(jogox.estadio, vEq[3].estadio);
-escrever_jogos(jogox);*/
-
+    baralhar_equipas(vEq);
+    criar_todas_jorn(j, vEq);
+    escrever_jornadas(j, vEq);
 
     getchar();
     return 0;
