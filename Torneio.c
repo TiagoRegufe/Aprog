@@ -147,14 +147,40 @@ typedef struct s_jornada  //Parte 2, ponto 22
     t_jogo jogpjor[NEQS/2];
 }t_jornada;
 
-void escrever_jornadas(t_jornada jornada[], t_equipa equipas[])
+void escrever_jornadas(t_jornada jornadas[], t_equipa equipas[])
 {
+    int c, f; //Vão ser as posições das equipas em casa e fora
     for(int i=0; i<(NEQS-1)*2; i++)
     {
         printf("Jogos da jornada %d:\n", i+1);
         for(int j=0; j<(NEQS/2); j++)
         {
-            printf("%s %d X %d %s  (%s)\n", jornada[i].jogpjor[j].eq_casa.nome, jornada[i].jogpjor[j].golos_casa, jornada[i].jogpjor[j].golos_fora, jornada[i].jogpjor[j].eq_fora.nome, jornada[i].jogpjor[j].estadio);
+            printf("%s %d X %d %s  (%s)\n", jornadas[i].jogpjor[j].eq_casa.nome, jornadas[i].jogpjor[j].golos_casa, jornadas[i].jogpjor[j].golos_fora, jornadas[i].jogpjor[j].eq_fora.nome, jornadas[i].jogpjor[j].estadio);
+            c=posicao_equipa(jornadas[i].jogpjor[j].eq_casa.nome, equipas);
+            f=posicao_equipa(jornadas[i].jogpjor[j].eq_fora.nome, equipas);
+            equipas[c].golos_marcados+=jornadas[i].jogpjor[j].golos_casa;
+            equipas[c].golos_sofridos+=jornadas[i].jogpjor[j].golos_fora;
+            equipas[f].golos_marcados+=jornadas[i].jogpjor[j].golos_fora;
+            equipas[f].golos_sofridos+=jornadas[i].jogpjor[j].golos_casa;
+            if (jornadas[i].jogpjor[j].golos_casa>jornadas[i].jogpjor[j].golos_fora)//equipa da casa ganha, fora perde
+            {
+                equipas[c].vitorias=equipas[c].vitorias+1;
+                equipas[c].pontos=equipas[c].pontos+3;
+                equipas[f].derrotas=equipas[f].derrotas+1;
+            }
+            else if (jornadas[i].jogpjor[j].golos_casa<jornadas[i].jogpjor[j].golos_fora)//equipa de fora ganha, casa perde
+            {
+                equipas[f].vitorias=equipas[f].vitorias+1;
+                equipas[f].pontos=equipas[f].pontos+3;
+                equipas[c].derrotas=equipas[c].derrotas+1;
+            }
+            else//equipas empatam
+            {
+                equipas[c].empates=equipas[c].empates+1;
+                equipas[c].pontos=equipas[c].pontos+1;
+                equipas[f].empates=equipas[f].empates+1;
+                equipas[f].pontos=equipas[f].pontos+1;
+            }
         }
         printf("\n============Tabela na Jornada %d===========\n", i+1);
         ordenar_por_qualificacao(equipas);
@@ -173,8 +199,8 @@ void criar_todas_jorn(t_jornada jornadas[], t_equipa equipas[])
                 jornadas[i].jogpjor[j].eq_casa=equipas[j];
                 jornadas[i].jogpjor[j].eq_fora=equipas[NEQS-1-j];
                 strcpy(jornadas[i].jogpjor[j].estadio, jornadas[i].jogpjor[j].eq_casa.estadio);
-                jornadas[i].jogpjor[j].golos_casa=rand()%4+1;
-                jornadas[i].jogpjor[j].golos_fora=rand()%2+1;
+                jornadas[i].jogpjor[j].golos_casa=rand()%5;
+                jornadas[i].jogpjor[j].golos_fora=rand()%3;
             }
         }
         else       // jornada par
@@ -184,8 +210,8 @@ void criar_todas_jorn(t_jornada jornadas[], t_equipa equipas[])
                 jornadas[i].jogpjor[j].eq_fora=equipas[j];
                 jornadas[i].jogpjor[j].eq_casa=equipas[NEQS-1-j];
                 strcpy(jornadas[i].jogpjor[j].estadio, jornadas[i].jogpjor[j].eq_casa.estadio);
-                jornadas[i].jogpjor[j].golos_casa=rand()%4+1;
-                jornadas[i].jogpjor[j].golos_fora=rand()%2+1;
+                jornadas[i].jogpjor[j].golos_casa=rand()%5;
+                jornadas[i].jogpjor[j].golos_fora=rand()%3;
             }
         }
         rodar_vEq(equipas);
@@ -208,7 +234,6 @@ int main()
     baralhar_equipas(vEq);
     criar_todas_jorn(j, vEq);
     escrever_jornadas(j, vEq);
-
     getchar();
     return 0;
 }
