@@ -4,9 +4,9 @@
 #include<math.h>
 #include<string.h>
 
-#define NEQS 18
+#define NEQS 18         //NEQS vale sempre 18
 
-typedef struct s_equipa                         //Parte 1, ponto 1
+typedef struct s_equipa         //Parte 1, ponto 1
 {
     char nome[15];
     char estadio[50];
@@ -18,7 +18,7 @@ typedef struct s_equipa                         //Parte 1, ponto 1
     int golos_sofridos;
 } t_equipa;
 
-void criar_equipas(t_equipa vEq[])              //Parte 1, ponto 2
+void criar_equipas(t_equipa vEq[])          //Parte 1, ponto 2
 {
     //Nomes das equipas
     strcpy(vEq[0].nome,  "Arouca        ");
@@ -58,7 +58,7 @@ void criar_equipas(t_equipa vEq[])              //Parte 1, ponto 2
     strcpy(vEq[15].estadio, "Estadio Joao Cardoso");
     strcpy(vEq[16].estadio, "Estadio Dom Afonso Henriques");
     strcpy(vEq[17].estadio, "Estadio do Vizela");
-    for(int i=0;i<NEQS;i++)                //zerar pontos, vitórias, empates, derrotas, golos
+    for(int i=0;i<NEQS;i++)         //zerar pontos, vitórias, empates, derrotas, golos
     {
         vEq[i].pontos=0;
         vEq[i].vitorias=0;
@@ -69,28 +69,30 @@ void criar_equipas(t_equipa vEq[])              //Parte 1, ponto 2
     }
 }
 
-void escrever_equipas(t_equipa vEq[])         //Parte 1, ponto 3
+void escrever_equipas(t_equipa vEq[])           //Parte 1, ponto 3   (escrever equipas e o nº de pontos, vitorias, etc.)
 {
     for(int i=0;i<NEQS;i++) printf("%s     %.2d  %.2d  %.2d  %.2d  %.2d  %.2d\n", vEq[i].nome, vEq[i].pontos, vEq[i].vitorias, vEq[i].empates, vEq[i].derrotas, vEq[i].golos_marcados, vEq[i].golos_sofridos);
 }
 
-void escrever_tabela(t_equipa vEq[])          //Parte 1, ponto 4
+void escrever_tabela(t_equipa vEq[])            //Parte 1, ponto 4
 {
     printf("                   P   V   E   D   M   S \n");
     escrever_equipas(vEq);
 }
 
-void troca(t_equipa vEq[], int p1, int p2)           //Parte 1, ponto 6
+void troca(t_equipa vEq[], int p1, int p2)          //Parte 1, ponto 6   (trocas as posições de duas equipas)
 {
-    t_equipa a=vEq[p1];vEq[p1]=vEq[p2];vEq[p2]=a;
+    t_equipa temp=vEq[p1];          //t_equipa a é temporária
+    vEq[p1]=vEq[p2];
+    vEq[p2]=temp;
 }
 
-void baralhar_equipas(t_equipa vEq[])                //Parte 1, ponto 8
+void baralhar_equipas(t_equipa vEq[])           //Parte 1, ponto 8   (baralhar tabela)
 {
     for(int i=NEQS-1; i>0; i--) troca(vEq, i, rand()%(i+1));
 }
 
-int melhor_qualificacao(t_equipa eqA, t_equipa eqB)         //Parte 1, ponto 11
+int melhor_qualificacao(t_equipa eqA, t_equipa eqB)         //Parte 1, ponto 11   (determinar equipa melhor qualificada)
 {
     if(eqA.pontos>eqB.pontos) return 1;
     if(eqA.pontos<eqB.pontos) return 0;
@@ -101,7 +103,7 @@ int melhor_qualificacao(t_equipa eqA, t_equipa eqB)         //Parte 1, ponto 11
     return 1;
 }
 
-int PosDoMenor(t_equipa vEq[], int n)
+int PosDoMenor(t_equipa vEq[], int n)           //Posição do pior classificado entre duas equipas
 {
     t_equipa eqA, eqB;
     int p=0;
@@ -114,26 +116,26 @@ int PosDoMenor(t_equipa vEq[], int n)
     return p;
 }
 
-int ordenar_por_qualificacao(t_equipa vEq[])                //Parte 1, ponto 13
+int ordenar_por_qualificacao(t_equipa vEq[])            //Parte 1, ponto 13   (ordenar pela ordem de melhor qualificação para o pior)
 {
     for (int q=NEQS; q>1; q--) troca(vEq, PosDoMenor(vEq, q), q-1);
     escrever_tabela(vEq);
 }
 
-int posicao_equipa (char nome[], t_equipa vEq[])            //Parte 1, ponto 15
+int posicao_equipa (char nome[], t_equipa vEq[])            //Parte 1, ponto 15   (descobrir a posição de uma equipa)
 {
     for(int i=0; i<NEQS; i++) if(strcmp(nome, vEq[i].nome)==0) return i;
     return -1;
 }
 
-void rodar_vEq(t_equipa vEq[])                     //Parte 1,ponto 17
+void rodar_vEq(t_equipa vEq[])          //Parte 1, ponto 17   (rodar a equipa de baixo para cima, mantendo a 1ºequipa no mesmo lugar)
 {
     t_equipa a=vEq[NEQS-1];
     for(int i=1; i<NEQS-1; i++) troca(vEq, i, i+1);
     a=vEq[1];
 }
 
-typedef struct s_jogo                       //Parte 2, ponto 19
+typedef struct s_jogo           //Parte 2, ponto 19
 {
     char estadio[50];
     t_equipa eq_casa;
@@ -142,14 +144,14 @@ typedef struct s_jogo                       //Parte 2, ponto 19
     int golos_fora;
 }t_jogo;
 
-typedef struct s_jornada  //Parte 2, ponto 22
+typedef struct s_jornada            //Parte 2, ponto 22
 {
-    t_jogo jogpjor[NEQS/2];
+    t_jogo jogpjor[NEQS/2];         //jogpjor são os 9 jogos de uma jornada
 }t_jornada;
 
 void escrever_jornadas(t_jornada jornadas[], t_equipa equipas[])
 {
-    int c, f; //Vão ser as posições das equipas em casa e fora
+    int c, f;           //Vão ser as posições das equipas em casa e fora
     for(int i=0; i<(NEQS-1)*2; i++)
     {
         printf("Jogos da jornada %d:\n", i+1);
@@ -162,19 +164,19 @@ void escrever_jornadas(t_jornada jornadas[], t_equipa equipas[])
             equipas[c].golos_sofridos+=jornadas[i].jogpjor[j].golos_fora;
             equipas[f].golos_marcados+=jornadas[i].jogpjor[j].golos_fora;
             equipas[f].golos_sofridos+=jornadas[i].jogpjor[j].golos_casa;
-            if (jornadas[i].jogpjor[j].golos_casa>jornadas[i].jogpjor[j].golos_fora)//equipa da casa ganha, fora perde
+            if (jornadas[i].jogpjor[j].golos_casa>jornadas[i].jogpjor[j].golos_fora)            //A eq_casa ganha
             {
                 equipas[c].vitorias=equipas[c].vitorias+1;
                 equipas[c].pontos=equipas[c].pontos+3;
                 equipas[f].derrotas=equipas[f].derrotas+1;
             }
-            else if (jornadas[i].jogpjor[j].golos_casa<jornadas[i].jogpjor[j].golos_fora)//equipa de fora ganha, casa perde
+            else if (jornadas[i].jogpjor[j].golos_casa<jornadas[i].jogpjor[j].golos_fora)           //A eq_fora ganha
             {
                 equipas[f].vitorias=equipas[f].vitorias+1;
                 equipas[f].pontos=equipas[f].pontos+3;
                 equipas[c].derrotas=equipas[c].derrotas+1;
             }
-            else//equipas empatam
+            else            //As equipas empatam
             {
                 equipas[c].empates=equipas[c].empates+1;
                 equipas[c].pontos=equipas[c].pontos+1;
@@ -214,20 +216,20 @@ void criar_todas_jorn(t_jornada jornadas[], t_equipa equipas[])
                 jornadas[i].jogpjor[j].golos_fora=rand()%3;
             }
         }
-        rodar_vEq(equipas);
+        rodar_vEq(equipas);         //Trocar as equipas que se defrontam
     }
 }
 
 int main()
 {
-    srand(time(NULL));
+    srand(time(NULL));          //Para a função rand() funcionar
 
     t_equipa vEq[NEQS];
     t_jornada j[(NEQS-1)*2];
     t_jogo jogos[NEQS/2];
 
     printf("Este trabalho consiste na simulacao do campeonato portugues de futebol 2021/2022\n\n");
-    criar_equipas(vEq);          //Única vez que vai ser usado
+    criar_equipas(vEq);         //Única vez que vai ser usado
     printf("==============Tabela Inicial==============\n");
     ordenar_por_qualificacao(vEq);
     printf("==========================================\n\n");
